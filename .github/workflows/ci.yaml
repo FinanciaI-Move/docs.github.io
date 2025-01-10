@@ -1,11 +1,10 @@
-name: ci
+name: CD
 on:
+  workflow_dispatch:
   push:
     branches:
-      - master
       - main
-permissions:
-  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
