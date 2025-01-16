@@ -15,6 +15,8 @@ As imagens dos workloads são armazenadas no **GitHub Container Registry (GHCR)*
 - Controle de versão de imagens.
 - Alto desempenho no pull de imagens.
 
+![cluster diagram](./images/cluster-diagram.png)
+
 ---
 
 ## Estrutura de Rede
