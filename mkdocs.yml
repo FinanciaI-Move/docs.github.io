@@ -2,4 +2,5 @@ site_name: Financial Move Tech Development Docs
 
 nav:
   - Home: index.md
+  - Cluster: k8s.md
   - Services: task-service.md
