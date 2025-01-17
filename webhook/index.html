@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Webhook - Financial Move Tech Development Docs</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Financial Move Tech Development Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../k8s/" class="nav-link">Cluster</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../task-service/" class="nav-link">Services</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Webhook</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../task-service/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            
+            
+            
+            
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h3 id="visao-geral">Visão Geral</h3>
+<p>Este documento descreve o funcionamento do sistema de processamento de webhooks, que centraliza e padroniza a integração com diferentes gateways de pagamento e serviços externos. O sistema é projetado para lidar com eventos de compra, estorno e outras interações, oferecendo uma solução escalável e padronizada.</p>
+<hr />
+<h3 id="estrutura-do-sistema">Estrutura do Sistema</h3>
+<h4 id="rotas">Rotas</h4>
+<p>As rotas são responsáveis por receber e validar os dados dos webhooks, encaminhando-os para a camada de serviços para processamento. Cada rota atende a um gateway ou serviço específico.
+<img alt="webhook diagram" src="../images/diagrama_webhook.png" /></p>
+<h5 id="rotas-principais">Rotas Principais</h5>
+<ol>
+<li>
+<p>/digital (<code>payment_gateways.py</code>): Processa webhooks do gateway Digital Guru.</p>
+</li>
+<li>
+<p>/tmb (<code>payment_gateways.py</code>): Processa webhooks do gateway TMB.</p>
+</li>
+<li>
+<p>/curseduca (<code>curseduca.py</code>): Processa webhooks do sistema Curseduca.</p>
+</li>
+<li>
+<p>/telegram (<code>telegram.py</code>): Processa notificações e comandos relacionados a bots no Telegram.</p>
+</li>
+</ol>
+<h4 id="camada-de-servicos">Camada de Serviços</h4>
+<p>A camada de serviços centraliza a lógica de processamento dos dados recebidos, garantindo a uniformidade e escalabilidade do sistema. A principal service utilizada é a <code>PaymentGatewayService</code>, que abstrai as operações comuns entre diferentes gateways.</p>
+<h5 id="dados-recebidos-pela-service">Dados Recebidos pela Service</h5>
+<ul>
+<li>
+<p>Dados do cliente: <code>first_name</code>, <code>last_name</code>, <code>email</code>, <code>cpf</code>, <code>phone</code>.</p>
+</li>
+<li>
+<p>Dados do produto: <code>product_name</code>, <code>amount</code>, <code>validity_in_months</code>.</p>
+</li>
+<li>
+<p>Status do pagamento: "Efetivado" ou "Cancelado".</p>
+</li>
+</ul>
+<h5 id="fluxo-de-processamento">Fluxo de Processamento</h5>
+<ol>
+<li>
+<p>Validação de Dados: Os dados recebidos são validados para garantir consistência.</p>
+</li>
+<li>
+<p>Operações com Usuários: Verifica ou cria o usuário no banco de dados.</p>
+</li>
+<li>
+<p>Operações com Produtos: Verifica ou cria o produto no banco de dados.</p>
+</li>
+<li>
+<p>Registro de Transações: Cria ou atualiza transações no sistema, dependendo do status recebido.</p>
+</li>
+</ol>
+<h5 id="exemplo-de-processamento-de-webhook">Exemplo de Processamento de Webhook</h5>
+<ol>
+<li>
+<p>A rota recebe um JSON do webhook.</p>
+</li>
+<li>
+<p>Os dados obrigatórios, como email e nome do produto, são extraídos.</p>
+</li>
+<li>
+<p>A rota encaminha esses dados para a <code>PaymentGatewayService</code>.</p>
+</li>
+<li>
+<p>A service processa os dados, interage com o banco de dados e registra as informações necessárias.</p>
+</li>
+<li>
+<p>A rota retorna uma resposta indicando sucesso ou erro.</p>
+</li>
+</ol>
+<hr />
+<h3 id="detalhes-dos-arquivos">Detalhes dos Arquivos</h3>
+<h4 id="1-arquivo-payment_gatewayspy">1. Arquivo <code>payment_gateways.py</code></h4>
+<p>Define as rotas principais para integração com gateways de pagamento.</p>
+<ul>
+<li>
+<p>Rota Digital Guru: Extraí dados como <code>email</code>, <code>produto</code> e <code>cpf</code> do JSON recebido e os encaminha para a <code>PaymentGatewayService</code>.</p>
+</li>
+<li>
+<p>Rota TMB: Processa os dados de forma similar, adaptada para o formato do gateway TMB.</p>
+</li>
+<li>
+<p>Rota LASTLINK: Processa os dados de forma similar, adaptada para o mesmo formato</p>
+</li>
+<li>
+<p>Rota Hotmart: Processa os dados de forma similiar, e adaptada para o formato semelhante.</p>
+</li>
+</ul>
+<h4 id="2-arquivo-process_allpy">2. Arquivo <code>process_all.py</code></h4>
+<p>Implementa a classe <code>ProcessAllPaymentGateways</code>, que centraliza a lógica de processamento.</p>
+<h5 id="principais-funcionalidades">Principais Funcionalidades</h5>
+<ul>
+<li>
+<p>Verifica ou cria usuários.</p>
+</li>
+<li>
+<p>Verifica ou cria produtos.</p>
+</li>
+<li>
+<p>Registra transações de pagamento ou estorno.</p>
+</li>
+</ul>
+<h4 id="3-arquivo-curseducapy">3. Arquivo <code>curseduca.py</code></h4>
+<p>Implementa uma rota para processar webhooks do sistema Curseduca, com foco em validação de email e chamada para o serviço <code>CurseducaService</code>.</p>
+<h4 id="4-arquivo-telegrampy">4. Arquivo <code>telegram.py</code></h4>
+<p>Processa notificações e comandos recebidos por bots no Telegram, com integração aos serviços <code>BotChefeService</code> e <code>BotNormalService</code>.</p>
+<hr />
+<h3 id="escalabilidade-e-adicao-de-novos-webhooks">Escalabilidade e Adição de Novos Webhooks</h3>
+<p>O sistema é projetado para permitir a fácil integração de novos webhooks. Para adicionar um novo gateway ou serviço:</p>
+<ol>
+<li>
+<p>Crie uma nova rota no arquivo apropriado.</p>
+</li>
+<li>
+<p>Extraia os dados necessários do JSON recebido.</p>
+</li>
+<li>
+<p>Encaminhe os dados para a <code>PaymentGatewayService</code> ou outro serviço relevante.</p>
+</li>
+</ol>
+<hr />
+<h3 id="conclusao">Conclusão</h3>
+<p>O sistema de webhooks oferece uma solução robusta e padronizada para integração com diferentes gateways de pagamento e serviços externos. Sua estrutura centralizada facilita a manutenção e permite escalabilidade para futuras integrações, garantindo maior organização e eficiência.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

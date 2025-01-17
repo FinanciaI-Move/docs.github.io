@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="None">
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>Financial Move Tech Development Docs</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/fontawesome.min.css" rel="stylesheet">
+        <link href="css/brands.min.css" rel="stylesheet">
+        <link href="css/solid.min.css" rel="stylesheet">
+        <link href="css/v4-font-face.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body class="homepage">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href=".">Financial Move Tech Development Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="." class="nav-link active" aria-current="page">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="k8s/" class="nav-link">Cluster</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="task-service/" class="nav-link">Services</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="webhook/" class="nav-link">Webhook</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" class="nav-link disabled">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="k8s/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#financial-move-tech-development-docs" class="nav-link">Financial Move Tech Development Docs</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#financial-move" class="nav-link">Financial Move</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#links" class="nav-link">Links</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#projetos" class="nav-link">Projetos</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#estrutura-cloud" class="nav-link">Estrutura cloud</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#servicos-externos" class="nav-link">Serviços externos</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#custos-gerados-pela-nossa-infraestrutura" class="nav-link">Custos gerados pela nossa infraestrutura</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#sobre-cada-projeto-ativo" class="nav-link">Sobre cada projeto ativo</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#padroes-de-desenvolvimento" class="nav-link">Padrões de desenvolvimento</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#lemas" class="nav-link">Lemas</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#branchs" class="nav-link">Branchs</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#time-de-desenvolvimento" class="nav-link">Time de desenvolvimento</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#commands" class="nav-link">Commands</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="financial-move-tech-development-docs">Financial Move Tech Development Docs</h1>
+<p>Github: https://github.com/FinanciaI-Move/</p>
+<h1 id="financial-move">Financial Move</h1>
+<h2 id="links">Links</h2>
+<p>Documentações: <a href="https://github.com/FinanciaI-Move">Github</a> | <a href="https://fmv.atlassian.net/wiki/spaces/FI/pages">~~Cofluence~~</a> | <a href="https://drive.google.com/drive/u/3/home">Drive botvipfinancial</a> | <a href="https://www.postman.com/financial-move/workspace/financial-move">Postman</a></p>
+<p>Clouds: <a href="https://vercel.com/financial-move">Vercel</a> | <a href="https://signin.aws.amazon.com">AWS</a> | <a href="https://console.cloud.google.com/welcome?pli=1&amp;project=triple-skein-223305">Google Cloud</a></p>
+<p>Apps: <a href="https://fmv.atlassian.net/jira/software/projects/BOT/boards/2">Board Bot</a> | <a href="https://fmv.atlassian.net/jira/servicedesk/projects/TIC/section/service-requests/custom/10">Tickets BOT</a> | <a href="https://fmv.atlassian.net/jira/software/projects/APP/boards/1">Board APP</a> | <a href="https://app.clockify.me/">Clockfy</a> | <a href="slack.com">Slack</a></p>
+<h2 id="projetos">Projetos</h2>
+<table>
+<thead>
+<tr>
+<th>Projeto</th>
+<th>Repositório</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://t.me/FinancialMoveBot">Bot VIP (normal)</a> e <a href="https://t.me/FinancialMoveChefeBot">Bot Chefe</a></td>
+<td><a href="https://github.com/FinanciaI-Move/bot-vip-telegram">bot-vip-telegram</a></td>
+<td>Ativo</td>
+</tr>
+<tr>
+<td><a href="https://dashboard-vip.vercel.app/">Dashboard Bot Chefe</a></td>
+<td><a href="https://github.com/FinanciaI-Move/dashboard-vip">dashboard-vip</a></td>
+<td>Ativo</td>
+</tr>
+<tr>
+<td>MySQL com scripts python</td>
+<td><a href="https://github.com/FinanciaI-Move/mysql-database">mysql-database</a></td>
+<td>Ativo</td>
+</tr>
+<tr>
+<td>Redis</td>
+<td><a href="https://github.com/FinanciaI-Move/redis-database">redis-database</a></td>
+<td>Ativo</td>
+</tr>
+<tr>
+<td><a href="https://socialogin.wtlltech.com/login">Cryptotraders App</a></td>
+<td><a href="https://github.com/FinanciaI-Move/cryptotraders-app">cryptotraders-app</a></td>
+<td>Ativo</td>
+</tr>
+<tr>
+<td>Bot VIP (whatsapp)</td>
+<td><a href="https://github.com/FinanciaI-Move/bot-vip-whatsapp">bot-vip-whatsapp</a></td>
+<td>Arquivado</td>
+</tr>
+<tr>
+<td>Room VIP</td>
+<td><a href="https://github.com/FinanciaI-Move/room-vip">room-vip</a></td>
+<td>Arquivado</td>
+</tr>
+<tr>
+<td>Planilha do milhão back-end</td>
+<td><a href="https://github.com/FinanciaI-Move/planilha-milhao-backend">planilha-do-milhao-backend</a></td>
+<td>Ativo</td>
+</tr>
+<tr>
+<td>Planilha do milhão front-end</td>
+<td><a href="https://github.com/FinanciaI-Move/planilha-milhao-frontend">planilha-do-milhao-frontend</a></td>
+<td>Ativo</td>
+</tr>
+</tbody>
+</table>
+<h2 id="estrutura-cloud">Estrutura cloud</h2>
+<h3 id="vercel">Vercel</h3>
+<p>Todos os projetos que são Next serão hospedados na Vercel</p>
+<ul>
+<li><a href="https://vercel.com/financial-move/dashboard-vip">dashboard-vip</a></li>
+</ul>
+<h3 id="aws">AWS</h3>
+<p>Nossa principal infraestrutura está na AWS, com instâncias EC2 e RDS, além de usar o S3 para armazenamento, Rekognition para reconhecimento de imagem, etc...</p>
+<h4 id="ec2-us-east-1">EC2 us-east-1</h4>
+<ul>
+<li><a href="https://us-east-1.console.aws.amazon.com/ec2/home?region=us-east-1#InstanceDetails:instanceId=i-0dace5b6d8a06fd13">QA1 do cryptotraders-app</a> (a ser migrado pós delete app_development)</li>
+<li><a href="https://us-east-1.console.aws.amazon.com/ec2/home?region=us-east-1#InstanceDetails:instanceId=i-09eb21d17466822d1">test-server</a> (a ser desativado pós validação carteira bot vip)</li>
+</ul>
+<h4 id="ec2-sa-east-1">EC2 sa-east-1</h4>
+<ul>
+<li><a href="https://sa-east-1.console.aws.amazon.com/ec2/home?region=sa-east-1#InstanceDetails:instanceId=i-0db5c1a60b86e63fc">Produção do bot-vip-telegram + redis</a></li>
+<li><a href="https://sa-east-1.console.aws.amazon.com/ec2/home?region=sa-east-1#InstanceDetails:instanceId=i-0a9e840d76526982a">QA1 do bot-vip-telegram</a></li>
+<li><a href="https://sa-east-1.console.aws.amazon.com/ec2/home?region=sa-east-1#InstanceDetails:instanceId=i-02720402df2454280">Homologação da app_development do bot-vip-telegram</a> (a ser desativado pós delete app_development)</li>
+</ul>
+<h4 id="rds-sa-east-1">RDS sa-east-1</h4>
+<ul>
+<li><a href="https://sa-east-1.console.aws.amazon.com/rds/home?region=sa-east-1#database:id=db-financialmove;is-cluster=false">Produção e QA1 do mysql-database</a></li>
+</ul>
+<h4 id="s3-global">S3 global</h4>
+<ul>
+<li><a href="https://s3.console.aws.amazon.com/s3/home?region=sa-east-1#">Bucket de arquivos do cryptotraders-app</a></li>
+<li><a href="https://us-east-1.console.aws.amazon.com/rekognition/home?region=us-east-1#/">Moderação de imagem do cryptotraders-app</a></li>
+</ul>
+<h3 id="google-cloud">Google Cloud</h3>
+<p>Aqui só usamos para conectar nossos projetos com o Google Workspace, para sincronização de arquivos em planilhas ou no drive.</p>
+<h4 id="apps">Apps</h4>
+<ul>
+<li><a href="https://console.cloud.google.com/home/dashboard?authuser=3&amp;hl=pt-br&amp;orgonly=true&amp;project=active-report-383515&amp;supportedpurview=project">active-report-383515</a></li>
+</ul>
+<h2 id="servicos-externos">Serviços externos</h2>
+<!-- Para validar essa seção, analisar os .env -->
+
+<p>Em nossos projetos usamos serviços externos, ou via API ou via webhook, para fazer integrações e automatizações.</p>
+<ul>
+<li>API da AWS para utilização dos serviços do cryptotraders-app</li>
+<li>Webhook e API do Telegram para a comunicação dos bots</li>
+<li>API e Websocket da Bybit para a comunicação principal com uma exchange</li>
+<li>API da Binance como alternativa para quando a Bybit está fora do ar</li>
+<li>API da Active Campaign para a sincronização dos dados internos com o CRM</li>
+<li>Webhook e API do Digital Guru para a sincronização dos pagamentos e assinaturas</li>
+<li>API da OpenAI para a utilização do GPT-3 em nossos projetos</li>
+<li>GraphQL do Facebook para coleta de dados de ads</li>
+<li>CoinMarketCap para coleta de dados de mercado</li>
+</ul>
+<h2 id="custos-gerados-pela-nossa-infraestrutura">Custos gerados pela nossa infraestrutura</h2>
+<table>
+<thead>
+<tr>
+<th>Serviço</th>
+<th>Custo médio mensal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AWS</td>
+<td>$ 1.500,00</td>
+</tr>
+<tr>
+<td>Vercel</td>
+<td>$ 20,00 x 2 = $40,00</td>
+</tr>
+<tr>
+<td>OpenAI</td>
+<td>$ 5,00</td>
+</tr>
+<tr>
+<td>CMC</td>
+<td>$ 35,00</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sobre-cada-projeto-ativo">Sobre cada projeto ativo</h2>
+<p>Para saber em específico sobre cada projeto, acesse o repositório correspondente e leia o README.md</p>
+<p><br/></p>
+<p><br/></p>
+<h1 id="padroes-de-desenvolvimento">Padrões de desenvolvimento</h1>
+<h2 id="lemas">Lemas</h2>
+<h3 id="mantenha-a-simplicidade-e-objetividade">Mantenha a simplicidade (e objetividade)</h3>
+<p>Não faça mais do que o necessário, não crie mais do que o necessário, não escreva mais do que o necessário, mas não se esqueça de fazer o necessário.</p>
+<p>Nossas entregas tendem a serem simples e objetivas, com validação de MVPs e entregas rápidas, porém, sem esquecer da qualidade.</p>
+<h3 id="use-o-seu-cerebro">Use o seu cérebro</h3>
+<p>Você tem permissão para pensar, e deve pensar. Se algo não te faz sentido ou parece errado, questione, e se for o caso, proponha uma solução.</p>
+<p>Todos os membros do time tem voz e vez, e com certeza tem algo a contribuir.</p>
+<h3 id="nada-esta-gravado-a-ferro-e-fogo">Nada está gravado a ferro e fogo</h3>
+<p>Nossos processos e padrões de desenvolvimento são flexíveis, e podem ser alterados a qualquer momento, desde que tenha ganho para o projeto e/ou time, e que seja validado por todos.</p>
+<h3 id="aprenda-e-ensine">Aprenda e ensine</h3>
+<p>Ninguém sabe tudo, e todos temos algo a aprender e a ensinar. Seja humilde para aprender, e generoso para ensinar.</p>
+<h4 id="referencias">Referências</h4>
+<ul>
+<li>Parte II - A prática leva à perfeição, do livro "How to be a better programmer" de Pete Goodliffe</li>
+</ul>
+<h2 id="branchs">Branchs</h2>
+<ul>
+<li>main</li>
+</ul>
+<p>Possui o código em produção, jamais efetuar o commit diretamente nela, somente via PR da develop -&gt; main.</p>
+<ul>
+<li>develop</li>
+</ul>
+<p>Possui o código candidato a producao, commits diretos somente para fix de algo já mergeado mas não no deploy, normalmente recebe PRs de branches de features, bugs, etc...</p>
+<ul>
+<li>qualquer outra branch</li>
+</ul>
+<p>Possuem o código de features, bugs, etc...</p>
+<p>Sempre criar uma branch a partir da develop e efetuar o PR para a mesma.</p>
+<p><br/></p>
+<p><br/></p>
+<h1 id="time-de-desenvolvimento">Time de desenvolvimento</h1>
+<h3 id="full-time">Full Time</h3>
+<ul>
+<li><a href="https://github.com/wtill">William Tavares (head)</a></li>
+<li><a href="https://github.com/lucas-kaminski">Lucas Kaminski (full stack)</a></li>
+<li><a href="https://github.com/mhscabia">Matheus Scabia (full stack)</a></li>
+<li><a href="https://github.com/Alexvjunior">Alex Junior (back-end)</a></li>
+</ul>
+<h3 id="part-time">Part Time</h3>
+<ul>
+<li><a href="">Guilherme Roque (front end)</a></li>
+</ul>
+<h3 id="softwares-recomendados">Softwares recomendados</h3>
+<table>
+<thead>
+<tr>
+<th>Função</th>
+<th>Software recomendado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IDE</td>
+<td><a href="https://code.visualstudio.com/">VSCode</a></td>
+</tr>
+<tr>
+<td>SSH</td>
+<td><a href="https://tabby.app/">Tabby</a></td>
+</tr>
+<tr>
+<td>Banco de dados</td>
+<td><a href="https://dbeaver.io/">DBeaver</a> ou <a href="https://www.beekeeperstudio.io/">Beekeeper</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="extensoes-recomendadas-vscode">Extensões recomendadas (VSCode)</h3>
+<h4 id="geral">Geral</h4>
+<table>
+<thead>
+<tr>
+<th>Extensão</th>
+<th>Função</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker">Code Speel Checker</a> e <a href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-portuguese">Brazilian Portuguese</a></td>
+<td>Corretor ortográfico que suporta português brasileiro e typos tanto em pt-br quanto em en-us</td>
+</tr>
+<tr>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight">Color Highlight</a></td>
+<td>Dentro do código, destaca cores em hexadecimal, rgb, rgba, hsl e hsla</td>
+</tr>
+<tr>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig">EditorConfig for VS Code</a></td>
+<td>Padroniza a formatação do código a partir de um arquivo <code>.editorconfig</code> na raiz do projeto</td>
+</tr>
+<tr>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost">Import Cost</a></td>
+<td>Analisa o tamanho dos imports e mostra o custo de cada um</td>
+</tr>
+<tr>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow">indent-rainbow</a></td>
+<td>Destaca a indentação do código com cores diferentes</td>
+</tr>
+<tr>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one">Markdown All in One</a></td>
+<td>.md toolset</td>
+</tr>
+<tr>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense">Path Intellisense</a></td>
+<td>Autocompleta caminhos de arquivos e pastas</td>
+</tr>
+<tr>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree">Todo Tree</a></td>
+<td>Mostra todos os TODOs do projeto em uma árvore</td>
+</tr>
+<tr>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml">YAML</a></td>
+<td>Suporte para YAML</td>
+</tr>
+</tbody>
+</table>
+<h4 id="python">Python</h4>
+<table>
+<thead>
+<tr>
+<th>Extensão</th>
+<th>Função</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Black Formatter</a></td>
+<td>Formata o código em Python no padrão Black</td>
+</tr>
+<tr>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance">Pylance</a></td>
+<td>Intellisense para Python</td>
+</tr>
+<tr>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Python</a></td>
+<td>Suporte para Python</td>
+</tr>
+<tr>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=KevinRose.vsc-python-indent">Python Indent</a></td>
+<td>Melhora a indentação do código Python</td>
+</tr>
+<tr>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=ms-python.flake8">Flake8</a></td>
+<td>Linter para Python</td>
+</tr>
+<tr>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=ms-python.pylint">Pylint</a></td>
+<td>Linter para Python</td>
+</tr>
+<tr>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python-debug">Python Debug</a></td>
+<td>Debug para Python</td>
+</tr>
+</tbody>
+</table>
+<h4 id="javascript">JavaScript</h4>
+<table>
+<thead>
+<tr>
+<th>Extensão</th>
+<th>Função</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">ESLint</a></td>
+<td>Linter para JavaScript</td>
+</tr>
+<tr>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">Prettier</a></td>
+<td>Formata o código em JavaScript no padrão Prettier</td>
+</tr>
+</tbody>
+</table>
+<h2 id="commands">Commands</h2>
+<ul>
+<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
+<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
+<li><code>mkdocs build</code> - Build the documentation site.</li>
+<li><code>mkdocs -h</code> - Print help message and exit.</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js"></script>
+        <script src="search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2025-01-17 18:06:33.601704+00:00
+-->
